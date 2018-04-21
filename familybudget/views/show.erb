@@ -1,0 +1,8 @@
+<p>Date: <%=@transaction.transaction_date %></p>
+<p>Amount: <%=@transaction.amount %></p>
+<p>Merchant: <%=@transaction.find_merchant().merchant_name %></p>
+<p>Tag: <%=@transaction.find_tag().tag_name %></p>
+
+<form action="/transactions/<%=@transaction.id %> /delete" method="post">
+  <input type="submit" value="Delete Transaction">
+</form>
