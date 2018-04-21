@@ -14,33 +14,13 @@ end
 
 get "/merchants" do
   @merchants = Merchant.all()
-  erb(:"transactions/index")
+  erb(:"merchants/index")
 end
 
 get "/tags" do
   @tags = Tag.all()
-  erb(:"transactions/index")
+  erb(:"tags/index")
 end
-
-# testing
-
-# get "/transactions" do
-#   @transactions = Transaction.find_by_tag()
-#   erb(:indexbytag)
-# end
-#
-# get "/merchants" do
-#   @merchants = Merchant.all()
-#   erb(:indexbytag)
-# end
-
-get "/tags" do
-  @tags = Tag.all()
-  erb(:"tags/tagselect")
-end
-
-# end testing
-
 
 # new
 get "/transactions/new" do
@@ -49,11 +29,23 @@ get "/transactions/new" do
   erb(:"transactions/new")
 end
 #
-# # show - i.e. an individual order
+# # show - i.e. an individual transaction
 get "/transactions/:id" do
   @transaction = Transaction.find(params[:id] )
   erb(:"transactions/show")
 end
+
+
+
+get "/tags/:id" do
+  @transactions = Tag.find_tags(params[:id] )
+  erb(:"tags/show")
+end
+
+# get "/tags/:id" do
+#    @transaction = Tag.find_tag_total(params[:id] )
+#   erb(:"tags/tagtotal")
+# end
 
 # create
 post "/transactions" do

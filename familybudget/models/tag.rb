@@ -38,4 +38,19 @@ class Tag
     return result
   end
 
+  def self.find_tag_total(id)
+    sql = "SELECT SUM(amount) FROM transactions WHERE tag_id = $1;"
+    values = [id]
+    result = SqlRunner.run( sql, values )
+    return result
+  end
+
+  def self.find_tags(id)
+    sql = "SELECT * FROM transactions WHERE tag_id = $1;"
+    values = [id]
+    tagtransactions = SqlRunner.run( sql, values )
+    result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
+    return result
+  end
+
 end

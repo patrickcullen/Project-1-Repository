@@ -1,0 +1,8 @@
+<p>Total : <% Tag.find_tag_total(@tag_id) %></p>
+
+<% @transactions.each do |transaction| %>
+  <p>Date: <%=transaction.transaction_date %>
+  Amount: <%=transaction.amount %>
+  Merchant: <%=transaction.find_merchant().merchant_name %>
+  Tag: <%=transaction.find_tag().tag_name %></p>
+<% end %>
