@@ -6,12 +6,14 @@
 <label for="amount">Amount:</label>
 <input type="text" id= "amount" name="amount">
 
+<label for="merchant_id">Merchant:</label>
 <select name="merchant_id" id="merchant_id">
   <% for merchant in @merchants %>
   <option value="<%= merchant.id %>"><%= merchant.merchant_name %></option>
   <% end %>
 </select>
 
+<label for="tag_id">Tag:</label>
 <select name="tag_id" id="tag_id">
   <% for tag in @tags %>
   <option value="<%= tag.id %>"><%= tag.tag_name %></option>

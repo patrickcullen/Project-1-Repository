@@ -3,38 +3,40 @@ require( 'sinatra/contrib/all' )
 require( 'pry-byebug' )
 
 require_relative("./models/transaction.rb")
+require_relative("./models/tag.rb")
+require_relative("./models/merchant.rb")
 
 # the index
 get "/transactions" do
   @transactions = Transaction.all()
-  erb(:index)
+  erb(:"transactions/index")
 end
 
 get "/merchants" do
   @merchants = Merchant.all()
-  erb(:index)
+  erb(:"transactions/index")
 end
 
 get "/tags" do
   @tags = Tag.all()
-  erb(:index)
+  erb(:"transactions/index")
 end
 
 # testing
 
-get "/transactions" do
-  @transactions = Transaction.find_by_tag()
-  erb(:indexbytag)
-end
-
-get "/merchants" do
-  @merchants = Merchant.all()
-  erb(:indexbytag)
-end
+# get "/transactions" do
+#   @transactions = Transaction.find_by_tag()
+#   erb(:indexbytag)
+# end
+#
+# get "/merchants" do
+#   @merchants = Merchant.all()
+#   erb(:indexbytag)
+# end
 
 get "/tags" do
   @tags = Tag.all()
-  erb(:indexbytag)
+  erb(:"tags/tagselect")
 end
 
 # end testing
@@ -44,13 +46,13 @@ end
 get "/transactions/new" do
   @merchants = Merchant.all()
   @tags = Tag.all()
-  erb(:new)
+  erb(:"transactions/new")
 end
 #
 # # show - i.e. an individual order
 get "/transactions/:id" do
   @transaction = Transaction.find(params[:id] )
-  erb(:show)
+  erb(:"transactions/show")
 end
 
 # create

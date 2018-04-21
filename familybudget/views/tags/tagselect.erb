@@ -1,0 +1,8 @@
+<label>
+  Select a Tag:
+    <select name="tag_id">
+    <% for tag in @tags %>
+    <option value="<%= tag.id %>"><%= tag.tag_name %></option>
+    <% end %>
+  </select>
+</label>

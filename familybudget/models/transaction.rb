@@ -52,7 +52,7 @@ class Transaction
     return result
   end
 
-  def find_by_tag
+  def self.find_by_tag
     sql = "SELECT * FROM transactions WHERE tag_id = $1;"
     values = [@tag_id]
     tagtransactions = SqlRunner.run( sql )
