@@ -10,9 +10,7 @@ class Tag
   end
 
   def save()
-    sql = "INSERT INTO tags(tag_name)
-    VALUES($1)
-    RETURNING *"
+    sql = "INSERT INTO tags(tag_name) VALUES($1) RETURNING *;"
     values = [@tag_name]
     tag_data = SqlRunner.run(sql, values)
     @id = tag_data.first()['id'].to_i
@@ -44,6 +42,19 @@ class Tag
     result = SqlRunner.run( sql, values )
     return result
   end
+
+  # def self.tag_transactions()
+  #   sql = "SELECT * FROM transactions ORDER BY tag_id, transaction_date;"
+  #   result = SqlRunner.run( sql )
+  #   return result
+  # end
+  #
+  # def self.calc_tag_transactions()
+  #   sql = "SELECT tag_id, SUM(amount) FROM transactions GROUP BY tag_id ORDER BY tag_id;"
+  #   tagtransactions = SqlRunner.run( sql )
+  #   result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
+  #   return result
+  # end
 
   def self.find_tags(id)
     sql = "SELECT * FROM transactions WHERE tag_id = $1;"

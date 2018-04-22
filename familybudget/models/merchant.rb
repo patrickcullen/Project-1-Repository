@@ -10,9 +10,7 @@ class Merchant
   end
 
   def save()
-    sql = "INSERT INTO merchants (merchant_name)
-    VALUES ($1)
-    RETURNING *"
+    sql = "INSERT INTO merchants (merchant_name) VALUES ($1) RETURNING *;"
     values = [@merchant_name]
     merchant_data = SqlRunner.run(sql, values)
     @id = merchant_data.first()['id'].to_i

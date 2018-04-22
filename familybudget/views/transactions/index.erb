@@ -1,9 +1,40 @@
-<% @transactions.each do |transaction| %>
-  <p>Date: <%= transaction.transaction_date() %></p>
-  <p>Amount: <%= transaction.amount() %></p>
-  <p>Merchant: <%=transaction.find_merchant().merchant_name %></p>
-  <p>Tag: <%=transaction.find_tag().tag_name %></p>
+<p>Total: £<%= @total_transactions['sum'] %>
+Budget Limit: £<%= @budget_limit %></p>
 
-  <p><a href="/transactions/<%= transaction.id%>">Show Transaction</a></p>
-  <hr/>
+<% if @total_transactions['sum'].to_i > @budget_limit%>
+  <h2>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h2>
+<% end%>
+<% save_month = '00' %>
+<% @transactions.each do |transaction| %>
+  <p> <%=transaction.transaction_date() %> £<%=transaction.amount() %>
+      <%=transaction.find_merchant().merchant_name %>
+      <%=transaction.find_tag().tag_name %>
+      <a href="/transactions/<%= transaction.id%>">Show Transaction</a>
+      <% if transaction.transaction_date()[5,2] != save_month%>
+      Expenditure for
+        <% case transaction.transaction_date()[5,2]
+                         when '01'%> January:
+                      <% when '02'%> February:
+                      <% when '03'%> March:
+                      <% when '04'%> April:
+                      <% when '05'%> May:
+                      <% when '06'%> June:
+                      <% when '07'%> July:
+                      <% when '08'%> August:
+                      <% when '09'%> September:
+                      <% when '10'%> October:
+                      <% when '11'%> November:
+                      <% when '12'%> December:
+          <% end %>
+          <%  month = transaction.transaction_date()[5,2].to_i %>
+          <%  month = month -= 1 %>
+          £<%=  @monthly_totals[month]['sum'] %>
+
+      <% end %>
+
+
+
+      </p>
+      <% save_month = transaction.transaction_date()[5,2] %>
 <% end %>
+  <hr/>

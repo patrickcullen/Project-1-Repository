@@ -1,4 +1,4 @@
-<p>Total : <% Tag.find_tag_total(@tag_id) %></p>
+<p>Total: £<%= @total_by_tag['sum'] %> Tag Category: <% %></p>
 
 <% @transactions.each do |transaction| %>
   <p>Date: <%=transaction.transaction_date %>

@@ -4,7 +4,7 @@ require_relative('./merchant.rb')
 
 class Transaction
 
-  attr_reader :transaction_date, :amount, :debit, :merchant_id, :tag_id, :id
+  attr_reader :transaction_date, :amount, :merchant_id, :tag_id, :id
 
   def initialize( options )
     @id = options['id'].to_i
@@ -45,8 +45,14 @@ class Transaction
     SqlRunner.run(sql)
   end
 
+  def delete()
+    sql = "DELETE FROM transactions WHERE id = $1;"
+    values = [@id]
+    SqlRunner.run( sql, values )
+  end
+
   def self.all()
-    sql = "SELECT * FROM transactions;"
+    sql = "SELECT * FROM transactions ORDER BY transaction_date;"
     transactions = SqlRunner.run( sql )
     result = transactions.map { |transaction| Transaction.new( transaction ) }
     return result
@@ -59,6 +65,28 @@ class Transaction
   #   result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
   #   return result
   # end
+
+  def self.find_total()
+    sql = "SELECT SUM(amount) FROM transactions;"
+    result = SqlRunner.run(sql)
+    return result
+  end
+
+  def self.find_monthly_total(month)
+    sql = "SELECT SUM(amount) FROM transactions
+    WHERE EXTRACT(MONTH FROM transaction_date) = $1;"
+    values = [month]
+    result = SqlRunner.run(sql, values)
+    return result
+  end
+
+  def self.calc_monthly_total()
+    sql = "select sum(amount) from transactions
+          group by EXTRACT(MONTH FROM transaction_date)
+          order by EXTRACT(MONTH FROM transaction_date);"
+    result = SqlRunner.run(sql)
+    return result
+  end
 
   def find_merchant( )
     sql = "SELECT * FROM merchants WHERE id = $1"
@@ -75,5 +103,20 @@ class Transaction
     result = Tag.new( tag.first )
     return result
   end
+
+  def self.tag_transactions()
+    sql = "SELECT * FROM transactions ORDER BY tag_id, transaction_date;"
+    result = SqlRunner.run( sql )
+    return result
+  end
+
+  def self.calc_tag_transactions()
+    sql = "SELECT tag_id, SUM(amount) FROM transactions GROUP BY tag_id ORDER BY tag_id;"
+    tagtransactions = SqlRunner.run( sql )
+    result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
+    return result
+  end
+
+
 
 end

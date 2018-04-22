@@ -1,0 +1,6 @@
+<% @tags.each do |tag| %>
+  <p>Tag Category: <%= tag.tag_name() %></p>
+
+  <p><a href="/tags/<%= tag.id%>"> Show Related Transactions</a></p>
+  <hr/>
+<% end %>
