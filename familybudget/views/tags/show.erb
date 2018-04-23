@@ -1,8 +1,10 @@
+
+
 <p>Total: £<%= @total_transactions['sum'] %>
 Budget Limit: £<%= @budget_limit %></p>
 
 <% if @total_transactions['sum'].to_i > @budget_limit%>
-  <h2>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h2>
+  <h3>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h3>
 <% end%>
 
 <p>Total: £<%= @total_by_tag['sum'] %> Tag Category: <% %></p>

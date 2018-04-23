@@ -1,40 +1,40 @@
+
+
 <p>Total: £<%= @total_transactions['sum'] %>
 Budget Limit: £<%= @budget_limit %></p>
 
 <% if @total_transactions['sum'].to_i > @budget_limit%>
-  <h2>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h2>
+  <h3>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h3>
 <% end%>
+
 <% save_month = '00' %>
 <% @transactions.each do |transaction| %>
+  <% if transaction.transaction_date()[5,2] != save_month%>
+    <p><b>Expenditure for
+    <% case transaction.transaction_date()[5,2]
+                   when '01'%> January:
+                <% when '02'%> February:
+                <% when '03'%> March:
+                <% when '04'%> April:
+                <% when '05'%> May:
+                <% when '06'%> June:
+                <% when '07'%> July:
+                <% when '08'%> August:
+                <% when '09'%> September:
+                <% when '10'%> October:
+                <% when '11'%> November:
+                <% when '12'%> December:
+      <% end %>
+      <%  month = transaction.transaction_date()[5,2].to_i %>
+      <%  month = month -= 1 %>
+      £<%= @monthly_totals[month]['sum']%></b></p>
+  <% end %>
+
   <p> <%=transaction.transaction_date() %> £<%=transaction.amount() %>
       <%=transaction.find_merchant().merchant_name %>
       <%=transaction.find_tag().tag_name %>
-      <a href="/transactions/<%= transaction.id%>">Show Transaction</a>
-      <% if transaction.transaction_date()[5,2] != save_month%>
-      <b>Expenditure for
-        <% case transaction.transaction_date()[5,2]
-                         when '01'%> January:
-                      <% when '02'%> February:
-                      <% when '03'%> March:
-                      <% when '04'%> April:
-                      <% when '05'%> May:
-                      <% when '06'%> June:
-                      <% when '07'%> July:
-                      <% when '08'%> August:
-                      <% when '09'%> September:
-                      <% when '10'%> October:
-                      <% when '11'%> November:
-                      <% when '12'%> December:
-          <% end %>
-          <%  month = transaction.transaction_date()[5,2].to_i %>
-          <%  month = month -= 1 %>
-          £<%=  @monthly_totals[month]['sum'] %></b>
-
-      <% end %>
-
-
-
-      </p>
-      <% save_month = transaction.transaction_date()[5,2] %>
+      <a href="/transactions/<%= transaction.id%>">Maintain Transaction</a></p>
+<% save_month = transaction.transaction_date()[5,2] %>
 <% end %>
-  <hr/>
+
+<hr/>

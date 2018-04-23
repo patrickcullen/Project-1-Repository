@@ -1,23 +1,24 @@
+
+
 <p>Total: £<%= @total_transactions['sum'] %>
 Budget Limit: £<%= @budget_limit %></p>
 
 <% if @total_transactions['sum'].to_i > @budget_limit%>
-  <h2>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h2>
+  <h3>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h3>
 <% end%>
+
 <% save_tag = 0 %>
 <% counter = 0 %>
 <% @transactions.each do |transaction| %>
-  <p> <%=transaction.transaction_date() %> £<%=transaction.amount() %>
-      <%=transaction.find_merchant().merchant_name %>
+  <% if transaction.tag_id != save_tag%>
+      <p><b>Expenditure for
       <%=transaction.find_tag().tag_name %>
-      <a href="/transactions/<%= transaction.id%>">Show Transaction</a>
-      <% if transaction.tag_id != save_tag%>
-            <b>Expenditure for
-            <%=transaction.find_tag().tag_name %>
-            £<%= @tag_totals[counter]['sum'] %></b>
-            <% counter += 1 %>
-      <% end %>
-  </p>
-      <% save_tag = transaction.tag_id %>
+      £<%= @tag_totals[counter]['sum'] %></b>
+        <!-- <a href="/tags/new">Maintain Tags</a> -->
+      <% counter += 1 %></p>
+    <% end %>
+    <p><%=transaction.transaction_date() %> £<%=transaction.amount() %>
+    <%=transaction.find_merchant().merchant_name %>
+    <% save_tag = transaction.tag_id %>
 <% end %>
-  <hr/>
+<hr/>

@@ -6,17 +6,18 @@ require_relative("./models/transaction.rb")
 require_relative("./models/tag.rb")
 require_relative("./models/merchant.rb")
 
-# the index
+#index
 get "/transactions" do
-  @budget_limit = 1400
+  @budget_limit = 400
   @total_transactions = Transaction.find_total[0]
   @transactions = Transaction.all()
   @monthly_totals = Transaction.calc_monthly_total()
+  # binding.pry
   erb(:"transactions/index")
 end
 
 get "/tags" do
-  @budget_limit = 1400
+  @budget_limit = 400
   @total_transactions = Transaction.find_total[0]
   @transactions = Transaction.tag_transactions()
   @tag_totals = Transaction.calc_tag_transactions()
@@ -27,11 +28,6 @@ get "/merchants" do
   @merchants = Merchant.all()
   erb(:"merchants/index")
 end
-
-# get "/tags" do
-#   @tags = Tag.all()
-#   erb(:"tags/index")
-# end
 
 # new
 get "/transactions/new" do
@@ -48,27 +44,21 @@ get "/merchants/new" do
   erb(:"merchants/new")
 end
 
-#
-# # show - i.e. an individual transaction
+# show - i.e. an individual transaction
 get "/transactions/:id" do
-  @budget_limit = 1400
+  @budget_limit = 400
   @total_transactions = Transaction.find_total[0]
   @transaction = Transaction.find(params[:id] )
   erb(:"transactions/show")
 end
 
 get "/tags/:id" do
-  @budget_limit = 1400
+  @budget_limit = 400
   @total_transactions = Transaction.find_total[0]
   @total_by_tag = Tag.find_tag_total(params[:id])[0]
   @transactions = Tag.find_tags(params[:id] )
   erb(:"tags/show")
 end
-
-# get "/tags/:id" do
-#    @transaction = Tag.find_tag_total(params[:id] )
-#   erb(:"tags/tagtotal")
-# end
 
 # create
 post "/transactions" do
@@ -89,19 +79,20 @@ post "/merchants" do
   redirect to "/merchants"
 end
 
-# # edit
-# get "/students/:id/edit" do
-#   @houses = House.all()
-#   @student = Student.find(params[:id])
-#   erb(:edit)
-# end
-#
-# # update
-# post "/students/:id/edit" do
-#   updated_student= Student.new(params)
-#   updated_student.update
-#   redirect to "students/#{updated_student.id}"
-# end
+# edit
+get "/transactions/:id/edit" do
+  @tags = Tag.all()
+  @merchants = Merchant.all()
+  @transaction = Transaction.find(params[:id])
+  erb(:"transactions/edit")
+end
+
+# update
+post "/transactions/:id/edit/update" do
+  updated_transaction= Transaction.new(params)
+  updated_transaction.update
+  redirect to "/transactions/#{updated_transaction.id}"
+end
 
 # destroy
 post "/transactions/:id/delete" do
