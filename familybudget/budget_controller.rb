@@ -8,7 +8,7 @@ require_relative("./models/merchant.rb")
 
 # the index
 get "/transactions" do
-  @budget_limit = 400
+  @budget_limit = 1400
   @total_transactions = Transaction.find_total[0]
   @transactions = Transaction.all()
   @monthly_totals = Transaction.calc_monthly_total()
@@ -16,7 +16,7 @@ get "/transactions" do
 end
 
 get "/tags" do
-  @budget_limit = 400
+  @budget_limit = 1400
   @total_transactions = Transaction.find_total[0]
   @transactions = Transaction.tag_transactions()
   @tag_totals = Transaction.calc_tag_transactions()
@@ -51,11 +51,15 @@ end
 #
 # # show - i.e. an individual transaction
 get "/transactions/:id" do
+  @budget_limit = 1400
+  @total_transactions = Transaction.find_total[0]
   @transaction = Transaction.find(params[:id] )
   erb(:"transactions/show")
 end
 
 get "/tags/:id" do
+  @budget_limit = 1400
+  @total_transactions = Transaction.find_total[0]
   @total_by_tag = Tag.find_tag_total(params[:id])[0]
   @transactions = Tag.find_tags(params[:id] )
   erb(:"tags/show")

@@ -11,7 +11,7 @@ Budget Limit: £<%= @budget_limit %></p>
       <%=transaction.find_tag().tag_name %>
       <a href="/transactions/<%= transaction.id%>">Show Transaction</a>
       <% if transaction.transaction_date()[5,2] != save_month%>
-      Expenditure for
+      <b>Expenditure for
         <% case transaction.transaction_date()[5,2]
                          when '01'%> January:
                       <% when '02'%> February:
@@ -28,7 +28,7 @@ Budget Limit: £<%= @budget_limit %></p>
           <% end %>
           <%  month = transaction.transaction_date()[5,2].to_i %>
           <%  month = month -= 1 %>
-          £<%=  @monthly_totals[month]['sum'] %>
+          £<%=  @monthly_totals[month]['sum'] %></b>
 
       <% end %>
 

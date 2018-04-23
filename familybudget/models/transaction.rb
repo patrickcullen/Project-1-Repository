@@ -106,14 +106,15 @@ class Transaction
 
   def self.tag_transactions()
     sql = "SELECT * FROM transactions ORDER BY tag_id, transaction_date;"
-    result = SqlRunner.run( sql )
+    hash = SqlRunner.run( sql )
+    result = hash.map { |transaction| Transaction.new( transaction ) }
     return result
   end
 
   def self.calc_tag_transactions()
     sql = "SELECT tag_id, SUM(amount) FROM transactions GROUP BY tag_id ORDER BY tag_id;"
-    tagtransactions = SqlRunner.run( sql )
-    result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
+    result = SqlRunner.run( sql )
+    # result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
     return result
   end
 

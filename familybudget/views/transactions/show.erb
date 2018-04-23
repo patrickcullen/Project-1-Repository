@@ -1,3 +1,10 @@
+<p>Total: £<%= @total_transactions['sum'] %>
+Budget Limit: £<%= @budget_limit %></p>
+
+<% if @total_transactions['sum'].to_i > @budget_limit%>
+  <h2>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h2>
+<% end%>
+
 <p>Date: <%=@transaction.transaction_date %></p>
 <p>Amount: <%=@transaction.amount %></p>
 <p>Merchant: <%=@transaction.find_merchant().merchant_name %></p>
@@ -5,4 +12,8 @@
 
 <form action="/transactions/<%=@transaction.id %> /delete" method="post">
   <input type="submit" value="Delete Transaction">
+</form>
+
+<form action="/transactions/<%=@transaction.id %> /update" method="post">
+  <input type="submit" value="Update Transaction">
 </form>
