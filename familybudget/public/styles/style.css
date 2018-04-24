@@ -1,0 +1,77 @@
+.grid {
+  border: 2px white solid;
+  height: 150px;
+  display: grid;
+  grid-template-columns: 23% 48% 23%;
+  grid-column-gap: 2%;
+}
+
+.grid h1 {
+  font-size: 55px;
+}
+
+.center {
+  justify-content: center;
+
+}
+
+.box {
+  border: 2px white solid;
+}
+
+table, th, td {
+   border-collapse: collapse;
+   table-layout: fixed;
+   border: 1px;
+   border-style: solid;
+   width: 150px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+    height: 30px;
+    vertical-align: bottom;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    /* position: fixed; /* Set the navbar to fixed position */ */
+    top: 50; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background: #ddd;
+    color: black;
+}
+
+body {
+  text-align: center;
+  align-content: center;
+}
+
+.logo1 {
+  height: 63%;
+  width: 76%;
+ }
+
+ .logo2 {
+   height: 63%;
+   width: 76%;
+   margin-top: 7%;
+   margin-bottom: auto;
+  }

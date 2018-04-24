@@ -17,8 +17,13 @@ Budget Limit: £<%= @budget_limit %></p>
         <!-- <a href="/tags/new">Maintain Tags</a> -->
       <% counter += 1 %></p>
     <% end %>
-    <p><%=transaction.transaction_date() %> £<%=transaction.amount() %>
-    <%=transaction.find_merchant().merchant_name %>
+    <table>
+      <tr>
+        <td><%=transaction.transaction_date() %></td>
+        <td> £<%=transaction.amount() %></td>
+        <td><%=transaction.find_merchant().merchant_name %></td>
+      </tr>
+    </table>
     <% save_tag = transaction.tag_id %>
 <% end %>
 <hr/>
