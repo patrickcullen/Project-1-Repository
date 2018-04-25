@@ -3,25 +3,25 @@
 <form action="/transactions" method= "post">
 
 <p><label for="transaction_date">Date:</label>
-<input type="text" id="transaction_date" name="transaction_date"></p>
+<input type="date" id="transaction_date" name="transaction_date"></p>
 
 <p><label for="amount">Amount:</label>
-<input type="text" id= "amount" name="amount"></p>
+<input type="float" id= "amount" name="amount" min="0"></p>
 
 <p><label for="merchant_id">Merchant:</label>
-<select name="merchant_id" id="merchant_id">
-  <% for merchant in @merchants %>
-  <option value="<%= merchant.id %>"><%= merchant.merchant_name %></option>
-  <% end %>
+  <select name="merchant_id" id="merchant_id">
+    <% for merchant in @merchants %>
+    <option value="<%= merchant.id %>"><%= merchant.merchant_name %></option>
+    <% end %>
 </select></p>
 
 <p><label for="tag_id">Tag:</label>
-<select name="tag_id" id="tag_id">
-  <% for tag in @tags %>
-  <option value="<%= tag.id %>"><%= tag.tag_name %></option>
-  <% end %>
+  <select name="tag_id" id="tag_id">
+    <% for tag in @tags %>
+      <option value="<%= tag.id %>"><%= tag.tag_name %></option>
+    <% end %>
 </select></p>
-
-<p><input type="submit" value="Create Record"></p>
-
+<div class="button">
+  <p><input type="submit" value="Create Transaction"></p>
+</div>
 </form>

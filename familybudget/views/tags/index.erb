@@ -14,7 +14,6 @@ Budget Limit: £<%= @budget_limit %></p>
       <p><b>Expenditure for
       <%=transaction.find_tag().tag_name %>
       £<%= @tag_totals[counter]['sum'] %></b>
-        <!-- <a href="/tags/new">Maintain Tags</a> -->
       <% counter += 1 %></p>
     <% end %>
     <table>

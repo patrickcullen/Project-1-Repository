@@ -6,7 +6,6 @@ Budget Limit: £<%= @budget_limit %></p>
 <% if @total_transactions['sum'].to_i > @budget_limit%>
   <h3>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h3>
 <% end%>
-<div class="center"
 <% save_month = '00' %>
 <% @transactions.each do |transaction| %>
   <% if transaction.transaction_date()[5,2] != save_month%>
@@ -26,8 +25,15 @@ Budget Limit: £<%= @budget_limit %></p>
                 <% when '12'%> December:
       <% end %>
       <%  month = transaction.transaction_date()[5,2].to_i %>
-      <%  month = month -= 1 %>
-      £<%= @monthly_totals[month]['sum']%></b></p>
+      <%  month = month.to_s %>
+      <%  monthly_totals = {} %>
+      <%  @monthly_totals.each do |result| %>
+        <% monthly_totals[result["date_part"]] = result["sum"] %>
+      <%  end %>
+      £<%= monthly_totals[month]%></b>
+
+
+
   <% end %>
   <table>
     <tr>
@@ -38,7 +44,6 @@ Budget Limit: £<%= @budget_limit %></p>
       <td><a href="/transactions/<%= transaction.id%>">Maintain Transaction</a></td>
     </tr>
   </table>
-<% save_month = transaction.transaction_date()[5,2] %>
+  <% save_month = transaction.transaction_date()[5,2] %>
 <% end %>
-</div>
 <hr/>

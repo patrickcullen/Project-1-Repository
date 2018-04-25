@@ -12,10 +12,12 @@ Budget Limit: £<%= @budget_limit %></p>
 <p>Merchant: <%=@transaction.find_merchant().merchant_name %></p>
 <p>Tag: <%=@transaction.find_tag().tag_name %></p>
 
-<form action="/transactions/<%=@transaction.id %>/delete" method="post">
-  <input type="submit" value="Delete Transaction">
-</form>
-
-<form action="/transactions/<%=@transaction.id %>/edit" method="get">
-  <input type="submit" value="Update Transaction">
-</form>
+<div class="button">
+  <form action="/transactions/<%=@transaction.id %>/delete" method="post">
+    <input type="submit" value="Delete Transaction">
+  </form>
+  <p> </p>
+  <form action="/transactions/<%=@transaction.id %>/edit" method="get">
+    <input type="submit" value="Update Transaction">
+  </form>
+</div>

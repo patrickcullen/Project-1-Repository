@@ -1,7 +1,8 @@
 
 
 <p>Total: £<%= @total_transactions['sum'] %>
-Budget Limit: £<%= @budget_limit %></p>
+  Budget Limit: £<%= @budget_limit %>
+</p>
 
 <% if @total_transactions['sum'].to_i > @budget_limit%>
   <h3>YOU HAVE EXCEEDED YOUR SPENDING BUDGET!</h3>
@@ -11,7 +12,8 @@ Budget Limit: £<%= @budget_limit %></p>
 
 <% @transactions.each do |transaction| %>
   <p>Date: <%=transaction.transaction_date %>
-  Amount: <%=transaction.amount %>
-  Merchant: <%=transaction.find_merchant().merchant_name %>
-  Tag: <%=transaction.find_tag().tag_name %></p>
+    Amount: <%=transaction.amount %>
+    Merchant: <%=transaction.find_merchant().merchant_name %>
+    Tag: <%=transaction.find_tag().tag_name %>
+  </p>
 <% end %>

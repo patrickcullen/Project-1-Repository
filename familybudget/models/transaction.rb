@@ -98,12 +98,23 @@ class Transaction
   end
 # EXTRACT(MONTH FROM transaction_date),
   def self.calc_monthly_total()
-    sql = "select sum(amount) from transactions
+    sql = "select EXTRACT(MONTH FROM transaction_date), sum(amount) from transactions
           group by EXTRACT(MONTH FROM transaction_date)
           order by EXTRACT(MONTH FROM transaction_date);"
     result = SqlRunner.run(sql)
     return result
   end
+
+
+  # def self.total_month(month)
+  #   results = Transaction.all.map { |transaction| transaction
+  #     if transaction.transaction_date.split("-")[1] == "0#{month}"}.compact
+  #   sum = 0
+  #   results.each { |transaction| sum += transaction.value
+  #     if transaction.transaction_date.split("-")[1] == "0#{month}" }
+  #   return [results] + [sum]
+  # end
+
 
   def find_merchant( )
     sql = "SELECT * FROM merchants WHERE id = $1"
@@ -131,10 +142,7 @@ class Transaction
   def self.calc_tag_transactions()
     sql = "SELECT tag_id, SUM(amount) FROM transactions GROUP BY tag_id ORDER BY tag_id;"
     result = SqlRunner.run( sql )
-    # result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
     return result
   end
-
-
 
 end
