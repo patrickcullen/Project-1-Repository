@@ -13,13 +13,13 @@ Budget Limit: £<%= @budget_limit %></p>
   <% if transaction.tag_id != save_tag%>
       <p><b>Expenditure for
       <%=transaction.find_tag().tag_name %>
-      £<%= @tag_totals[counter]['sum'] %></b>
+      £<%= '%.2f' % @tag_totals[counter]['sum'] %></b>
       <% counter += 1 %></p>
     <% end %>
     <table>
       <tr>
         <td><%=transaction.transaction_date() %></td>
-        <td> £<%=transaction.amount() %></td>
+        <td> £<%= '%.2f' % transaction.amount() %></td>
         <td><%=transaction.find_merchant().merchant_name %></td>
       </tr>
     </table>

@@ -43,19 +43,6 @@ class Tag
     return result
   end
 
-  # def self.tag_transactions()
-  #   sql = "SELECT * FROM transactions ORDER BY tag_id, transaction_date;"
-  #   result = SqlRunner.run( sql )
-  #   return result
-  # end
-  #
-  # def self.calc_tag_transactions()
-  #   sql = "SELECT tag_id, SUM(amount) FROM transactions GROUP BY tag_id ORDER BY tag_id;"
-  #   tagtransactions = SqlRunner.run( sql )
-  #   result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
-  #   return result
-  # end
-
   def self.find_tags(id)
     sql = "SELECT * FROM transactions WHERE tag_id = $1;"
     values = [id]

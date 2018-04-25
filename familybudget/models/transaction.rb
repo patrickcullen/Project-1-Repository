@@ -75,14 +75,6 @@ class Transaction
     return result
   end
 
-  # def self.find_by_tag
-  #   sql = "SELECT * FROM transactions WHERE tag_id = $1;"
-  #   values = [@tag_id]
-  #   tagtransactions = SqlRunner.run( sql )
-  #   result = tagtransactions.map { |transaction| Transaction.new( transaction ) }
-  #   return result
-  # end
-
   def self.find_total()
     sql = "SELECT SUM(amount) FROM transactions;"
     result = SqlRunner.run(sql)
@@ -96,7 +88,7 @@ class Transaction
     result = SqlRunner.run(sql, values)
     return result
   end
-# EXTRACT(MONTH FROM transaction_date),
+
   def self.calc_monthly_total()
     sql = "select EXTRACT(MONTH FROM transaction_date), sum(amount) from transactions
           group by EXTRACT(MONTH FROM transaction_date)
@@ -104,17 +96,6 @@ class Transaction
     result = SqlRunner.run(sql)
     return result
   end
-
-
-  # def self.total_month(month)
-  #   results = Transaction.all.map { |transaction| transaction
-  #     if transaction.transaction_date.split("-")[1] == "0#{month}"}.compact
-  #   sum = 0
-  #   results.each { |transaction| sum += transaction.value
-  #     if transaction.transaction_date.split("-")[1] == "0#{month}" }
-  #   return [results] + [sum]
-  # end
-
 
   def find_merchant( )
     sql = "SELECT * FROM merchants WHERE id = $1"

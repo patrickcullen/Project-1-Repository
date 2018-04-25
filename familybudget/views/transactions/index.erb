@@ -30,15 +30,12 @@ Budget Limit: £<%= @budget_limit %></p>
       <%  @monthly_totals.each do |result| %>
         <% monthly_totals[result["date_part"]] = result["sum"] %>
       <%  end %>
-      £<%= monthly_totals[month]%></b>
-
-
-
-  <% end %>
+      £<%='%.2f' % monthly_totals[month]%></b>
+    <% end %>
   <table>
     <tr>
       <td><%=transaction.transaction_date() %></td>
-      <td>£<%=transaction.amount() %></td>
+      <td>£<%='%.2f' % transaction.amount() %></td>
       <td><%=transaction.find_merchant().merchant_name %></td>
       <td><%=transaction.find_tag().tag_name %></td>
       <td><a href="/transactions/<%= transaction.id%>">Maintain Transaction</a></td>

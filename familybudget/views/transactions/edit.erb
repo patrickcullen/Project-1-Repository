@@ -9,7 +9,7 @@
   </p>
   <p>
     <label for="amount">Amount:</label>
-    <input type="float" value= "<%= @transaction.amount %>"
+    <input type="number" value= "<%= '%.2f' % @transaction.amount %>"
     id= "amount" name="amount" min="0">
   </p>
   <p>

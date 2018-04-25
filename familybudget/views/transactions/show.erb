@@ -8,7 +8,7 @@ Budget Limit: £<%= @budget_limit %></p>
 <% end%>
 
 <p>Date: <%=@transaction.transaction_date %></p>
-<p>Amount: <%=@transaction.amount %></p>
+<p>Amount: £<%= '%.2f' % @transaction.amount %></p>
 <p>Merchant: <%=@transaction.find_merchant().merchant_name %></p>
 <p>Tag: <%=@transaction.find_tag().tag_name %></p>
 

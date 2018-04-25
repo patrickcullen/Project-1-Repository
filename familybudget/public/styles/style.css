@@ -20,9 +20,7 @@
 
 input, select {
   border: 2px black solid;
-
 }
-
 
 .grid h1 {
   font-size: 55px;
@@ -30,7 +28,6 @@ input, select {
 
 .center {
   justify-content: center;
-
 }
 
 table {
@@ -39,38 +36,38 @@ table {
 }
 
 table, th, td {
-   border-collapse: collapse;
-   table-layout: fixed;
-   border: 1px;
-   border-style: solid;
-   width: 150px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px;
+  border-style: solid;
+  width: 150px;
 }
 
 
 td {
-    height: 30px;
-    vertical-align: bottom;
+  height: 30px;
+  vertical-align: bottom;
 }
 
 .navbar {
-    overflow: hidden;
-    background-color: #333;
-    top: 50;
-    width: 100%;
+  overflow: hidden;
+  background-color: #333;
+  top: 50;
+  width: 100%;
 }
 
 .navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 .navbar a:hover {
-    background: #ddd;
-    color: black;
+  background: #ddd;
+  color: black;
 }
 
 body {
@@ -84,9 +81,9 @@ body {
   width: 76%;
  }
 
- .logo2 {
-   height: 63%;
-   width: 76%;
-   margin-top: 7%;
-   margin-bottom: auto;
-  }
+.logo2 {
+  height: 63%;
+  width: 76%;
+  margin-top: 7%;
+  margin-bottom: auto;
+}
